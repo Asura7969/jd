@@ -1,0 +1,23 @@
+package com.taotao.cart.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.taotao.cart.mapper.CartMapper;
+import com.taotao.cart.pojo.Cart;
+
+@Service
+public class CartService {
+
+    @Autowired
+    private CartMapper cartMapper;
+    
+    public void addItemToCart(Long itemId) {
+        Cart record = new Cart();
+        record.setItemId(itemId);
+        this.cartMapper.insert(record);
+        
+        
+    }
+
+}

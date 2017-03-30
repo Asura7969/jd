@@ -1,0 +1,21 @@
+package com.taotao.web.service;
+
+import org.springframework.stereotype.Service;
+
+import com.taotao.web.bean.Order;
+
+@Service
+public class OrderService {
+
+    public String sumbit(Order order) {
+        
+        
+        
+        return null;
+    }
+    
+    
+    
+    
+    
+}

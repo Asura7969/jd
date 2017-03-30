@@ -1,0 +1,27 @@
+package com.taotao.web.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+
+
+@Service
+public class ItemService {
+    
+    @Autowired
+    private ApiService apiService;
+    @Value("${taotao_manage_url}")
+    private String taotao_manage_url;
+
+    public Item queryItemById(Long itemId) {
+        String url = "/rest/api/item/"+itemId;
+        this.apiService.doGet(url);
+        return null;
+    }
+    
+    
+    
+    
+    
+}

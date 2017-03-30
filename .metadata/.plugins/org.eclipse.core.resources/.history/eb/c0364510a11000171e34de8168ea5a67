@@ -1,0 +1,32 @@
+package com.taotao.cart.service;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.abel533.mapper.Mapper;
+import com.taotao.cart.pojo.Cart;
+import com.taotao.common.util.CookieUtils;
+
+@Service
+public class CartCookieService {
+
+    
+    public static final String COOKIE_NAME = "TT_CART";
+    
+    
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    
+    public List<Cart> queryCartList(HttpServletRequest request) {
+        
+        
+        String cookieValue = CookieUtils.getCookieValue(request, COOKIE_NAME);
+        
+        
+        return MAPPER.readValue(cookieValue, MAPPER.getTypeFactory().constructCollectionType(List.class, Cart.class));
+    }
+
+}

@@ -1,0 +1,31 @@
+package com.taotao.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.taotao.web.bean.Item;
+import com.taotao.web.bean.ItemQ;
+import com.taotao.web.service.ItemService;
+
+
+
+
+
+@Controller
+@RequestMapping("item")
+public class ItemController {
+    
+    @Autowired
+    private ItemService itemservice;
+    @RequestMapping(value="${itemId}")
+    public ModelAndView showDetil(@PathVariable("itemId")Long itemId){
+        ModelAndView mv = new ModelAndView("item");
+        ItemQ itemQ = this.itemservice.queryItemById(itemId);
+        mv.addObject("item",itemQ);
+        return mv;
+        
+    }
+}

@@ -1,0 +1,21 @@
+package com.taotao.cart.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.taotao.cart.bean.ItemQ;
+import com.taotao.common.service.ApiService;
+
+@Service
+public class ItemService {
+    @Autowired
+    private ApiService apiService;
+    
+    
+    public ItemQ queryItemQById(Long itemId){
+        
+        String urlString="http://manage.taotao.com/rest/api/item/"+itemId;
+        this.apiService.doGet(url);
+    }
+    
+}

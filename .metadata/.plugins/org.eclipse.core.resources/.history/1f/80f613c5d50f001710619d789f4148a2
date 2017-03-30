@@ -1,0 +1,40 @@
+package com.taotao.search.mq.handler;
+
+import java.io.IOException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class ItemMqHandler {
+    
+    
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    @Autowired
+    private HttpSolrServer httpSolrServer;
+    
+    public void execute(String msg){
+        
+        try {
+            JsonNode jsonNode = MAPPER.readTree(msg);
+            String type = jsonNode.get("type").asText();
+            Long itemId = jsonNode.get("itemId").asLong();
+            
+            if(StringUtils.equals(type, "insert")||StringUtils.equals(type, "update")){
+                
+                this.httpSolrServer.addBean(obj);
+                this.httpSolrServer.commit();
+            }else if(StringUtils.equals(type, "delete")){
+                this.httpSolrServer.deleteById(String.valueOf(itemId));
+                this.httpSolrServer.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+}

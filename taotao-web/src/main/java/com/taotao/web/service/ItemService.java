@@ -1,0 +1,120 @@
+package com.taotao.web.service;
+
+
+import java.io.IOException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.taotao.common.service.ApiService;
+import com.taotao.common.service.RedisService;
+import com.taotao.manage.pojo.ItemDesc;
+import com.taotao.web.bean.ItemQ;
+
+
+@Service
+public class ItemService {
+
+    @Autowired
+    private ApiService apiService;
+    @Value("${taotao_manage_url}")
+    private String taotao_manage_url;
+    @Autowired
+    private RedisService redisService;
+
+    public static final String REDIS_KEY = "TAOTAO_WEB_ITEM_DETAIL_";
+
+    private static final Integer REDIS_TIME = 60 * 60 * 24;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    public ItemQ queryItemById(Long itemId) {
+
+        //从缓存中命中，有就返回，没有就继续执行
+        String key = REDIS_KEY + itemId;
+        try {
+            String cacheData = this.redisService.get(key);
+            if (StringUtils.isNotEmpty(cacheData)) {
+                return MAPPER.readValue(cacheData, ItemQ.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            String url = taotao_manage_url + "/rest/api/item/" + itemId;
+            String jsonData = this.apiService.doGet(url);
+
+            if (StringUtils.isEmpty(jsonData)) {
+                return null;
+            }
+
+
+            //将数据写入到缓存中
+            try {
+                this.redisService.set(key, jsonData, REDIS_TIME);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return MAPPER.readValue(jsonData, ItemQ.class);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public ItemDesc queryItemDescByItemId(Long itemId) {
+        try {
+            String url = taotao_manage_url + "/rest/api/item/desc/" + itemId;
+            String jsonData = this.apiService.doGet(url);
+            return MAPPER.readValue(jsonData, ItemDesc.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String queryItemParamItemByItemId(Long itemId) {
+        try {
+            String url = taotao_manage_url + "/rest/api/item/param/item/" + itemId;
+            String jsonData = this.apiService.doGet(url);
+            // 解析json
+            JsonNode jsonNode = MAPPER.readTree(jsonData);
+            String paramData = jsonNode.get("paramData").asText();
+
+            ArrayNode arrayNode = (ArrayNode) MAPPER.readTree(paramData);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("<table cellpadding=\"0\" cellspacing=\"1\" width=\"100%\" border=\"0\" class=\"Ptable\"><tbody>");
+
+            for (JsonNode param : arrayNode) {
+                sb.append("<tr><th class=\"tdTitle\" colspan=\"2\">" + param.get("group").asText()
+                        + "</th></tr>");
+                ArrayNode params = (ArrayNode) param.get("params");
+                for (JsonNode p : params) {
+                    sb.append("<tr><td class=\"tdTitle\">" + p.get("k").asText() + "</td><td>"
+                            + p.get("v").asText() + "</td></tr>");
+                }
+            }
+
+            sb.append("</tbody></table>");
+            return sb.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+}

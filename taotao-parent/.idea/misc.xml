@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-cart" />
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-manage/taotao-manage-web" />
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-order" />
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-search" />
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-sso" />
+    <file type="web" url="file://$PROJECT_DIR$/../taotao-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-common/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-manage/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-order/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-search/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-web/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-cart/pom.xml" />
+        <option value="$PROJECT_DIR$/../itcast-solrj/pom.xml" />
+        <option value="$PROJECT_DIR$/../itcast-redis/pom.xml" />
+        <option value="$PROJECT_DIR$/../itcast-httpclient/pom.xml" />
+        <option value="$PROJECT_DIR$/../taotao-sso/pom.xml" />
+        <option value="$PROJECT_DIR$/../itcast-rabbitmq/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8 (1)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

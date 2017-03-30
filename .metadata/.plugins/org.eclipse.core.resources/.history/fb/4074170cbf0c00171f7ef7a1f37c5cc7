@@ -1,0 +1,19 @@
+package com.taotao.web.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class IndexService {
+    
+    @Autowired
+    private ApiService apiService;
+    
+    
+
+    public String queryIndexAD1() {
+        String urlString = "http://manage.taotao.com/rest/content?categoryId=33&page=1&rows=6"
+        String jsonDataString = this.apiService.doGet(urlString);
+        return null;
+    }
+}

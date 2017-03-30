@@ -1,0 +1,49 @@
+package com.taotao.cart.service;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import threadlocal.UserThreadLocal;
+
+import com.taotao.cart.bean.User;
+import com.taotao.cart.mapper.CartMapper;
+import com.taotao.cart.pojo.Cart;
+import com.taotao.common.service.ApiService;
+
+@Service
+public class CartService {
+
+    @Autowired
+    private CartMapper cartMapper;
+    @Autowired
+    private ApiService apiService;
+    
+    public void addItemToCart(Long itemId) {
+        User user = UserThreadLocal.get();
+        this.apiService
+        
+        Cart record = new Cart();
+        record.setItemId(itemId);
+        record.setUserId(user.getId());
+        Cart cart = this.cartMapper.selectOne(record);
+        
+        if(null==null){
+            //不存在
+            cart = new Cart();
+            
+            //TODO
+            
+            this.cartMapper.insert(cart);
+        }else {
+            //存在，数量要相加，默认是1
+            cart.setNum(cart.getNum()+1);
+            cart.setUpdated(new Date());
+            
+            this.cartMapper.updateByPrimaryKey(cart);
+        }
+        
+    }
+
+}

@@ -1,0 +1,19 @@
+package com.taotao.search.service;
+
+import org.springframework.stereotype.Service;
+
+import com.taotao.common.service.ApiService;
+import com.taotao.search.bean.Item;
+
+@Service
+public class ItemService {
+    
+    
+    private ApiService apiService;
+    
+    public Item queryItemById(Long itemId){
+        
+        
+        
+    }
+}

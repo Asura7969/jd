@@ -1,0 +1,43 @@
+package com.taotao.cart.service;
+
+import java.io.IOException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.ClientProtocolException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cart.bean.ItemQ;
+import com.taotao.common.service.ApiService;
+
+@Service
+public class ItemService {
+    @Autowired
+    private ApiService apiService;
+
+
+    @Value("${taotao_manage_url}")
+    private String taotao_manage_url;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+
+    public ItemQ queryItemQById(Long itemId) {
+
+        try {
+            String url = taotao_manage_url + "/rest/api/item/" + itemId;
+            String jsonData = this.apiService.doGet(url);
+            if (StringUtils.isNoneEmpty(jsonData)) {
+                return MAPPER.readValue(jsonData, ItemQ.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+}

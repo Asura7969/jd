@@ -1,0 +1,29 @@
+package com.taotao.web.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import threadlocal.UserThreadLocal;
+
+import com.taotao.common.service.ApiService;
+import com.taotao.web.bean.Cart;
+
+@Service
+public class CartService {
+    
+    @Autowired
+    private ApiService apiService;
+    @Value("${TAOTAO_CART_URL}")
+    private String TAOTAO_CART_URL;
+
+    public List<Cart> queryCartList() {
+        
+        String url  = "/service/api/cart/"+UserThreadLocal.get().getId();
+        this.apiService.doGet(url);
+        
+        return null;
+    }
+}

@@ -1,0 +1,28 @@
+package com.taotao.cart.service;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Service;
+
+import com.taotao.cart.pojo.Cart;
+import com.taotao.common.util.CookieUtils;
+
+@Service
+public class CartCookieService {
+
+    
+    public static final String COOKIE_NAME = "TT_CART";
+    
+    
+    public List<Cart> queryCartList(HttpServletRequest request) {
+        
+        
+        String cookieValue = CookieUtils.getCookieValue(request, COOKIE_NAME);
+        
+        
+        return null;
+    }
+
+}

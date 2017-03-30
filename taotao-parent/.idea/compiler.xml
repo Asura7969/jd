@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="itcast-httpclient" />
+        <module name="itcast-rabbitmq" />
+        <module name="itcast-redis" />
+        <module name="itcast-solrj" />
+        <module name="taotao-cart" />
+        <module name="taotao-common" />
+        <module name="taotao-manage-mapper" />
+        <module name="taotao-manage-pojo" />
+        <module name="taotao-manage-service" />
+        <module name="taotao-manage-web" />
+        <module name="taotao-order" />
+        <module name="taotao-search" />
+        <module name="taotao-sso" />
+        <module name="taotao-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="itcast-httpclient" target="1.5" />
+      <module name="itcast-rabbitmq" target="1.5" />
+      <module name="itcast-redis" target="1.5" />
+      <module name="itcast-solrj" target="1.5" />
+      <module name="taotao-cart" target="1.8" />
+      <module name="taotao-common" target="1.8" />
+      <module name="taotao-manage" target="1.8" />
+      <module name="taotao-manage-mapper" target="1.8" />
+      <module name="taotao-manage-pojo" target="1.8" />
+      <module name="taotao-manage-service" target="1.8" />
+      <module name="taotao-manage-web" target="1.8" />
+      <module name="taotao-order" target="1.8" />
+      <module name="taotao-parent" target="1.8" />
+      <module name="taotao-search" target="1.8" />
+      <module name="taotao-sso" target="1.8" />
+      <module name="taotao-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

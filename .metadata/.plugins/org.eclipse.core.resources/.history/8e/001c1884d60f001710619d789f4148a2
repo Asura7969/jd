@@ -1,0 +1,26 @@
+package com.taotao.search.service;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.common.service.ApiService;
+import com.taotao.search.bean.Item;
+
+@Service
+public class ItemService {
+    
+    @Autowired
+    private ApiService apiService;
+    
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    
+    public Item queryItemById(Long itemId){
+        String url = "http://manage.taotao.com/rest/api/item/"+itemId;
+        String jsonData = this.apiService.doGet(url);
+        if(StringUtils.isNotEmpty(jsonData)){
+            
+        }
+    }
+}

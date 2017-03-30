@@ -1,0 +1,44 @@
+package com.taotao.web.service;
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.taotao.web.bean.ItemQ;
+
+
+
+@Service
+public class ItemService {
+    
+    @Autowired
+    private ApiService apiService;
+    @Value("${taotao_manage_url}")
+    private String taotao_manage_url;
+    
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    public ItemQ queryItemById(Long itemId) {
+        try {
+            String url = taotao_manage_url+"/rest/api/item/"+itemId;
+            
+            String jsonData = this.apiService.doGet(url);
+            return MAPPER.readValue(jsonData, ItemQ.class);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
+}

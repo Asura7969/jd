@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;rabbitmq-context.xml&apos; to &apos;spring&apos;&#x0D;&#x0A;- Original project: &apos;itcast-rabbitmq&apos;&#x0D;&#x0A;- Destination element: &apos;spring&apos;&#x0D;&#x0A;- Original element: &apos;rabbitmq-context.xml&apos;" description="Copy file" element1="src/main/resources/spring/rabbitmq-context.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1490273686765" target="/taotao-manage-web/src/main/resources/spring" units="0" version="1.0"/>
+</session>
